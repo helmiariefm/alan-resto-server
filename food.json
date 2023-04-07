@@ -1,0 +1,37 @@
+[
+    {
+        "nama": "Sate Ayam",
+        "foto": "https://cdn-2.tstatic.net/jambi/foto/bank/images/resep-sate-ayam-manis.jpg",
+        "harga": 30000
+    },
+    {
+        "nama": "Bakso",
+        "foto": "https://cdn-2.tstatic.net/jambi/foto/bank/images/resep-sate-ayam-manis.jpg",
+        "harga": 10000
+    },
+    {
+        "nama": "Tempe Goreng",
+        "foto": "https://cdn-2.tstatic.net/jambi/foto/bank/images/resep-sate-ayam-manis.jpg",
+        "harga": 5000
+    },
+    {
+        "nama": "Tahu Isi",
+        "foto": "https://cdn-2.tstatic.net/jambi/foto/bank/images/resep-sate-ayam-manis.jpg",
+        "harga": 10000
+    },
+    {
+        "nama": "Soto Ayam",
+        "foto": "https://cdn-2.tstatic.net/jambi/foto/bank/images/resep-sate-ayam-manis.jpg",
+        "harga": 30000
+    },
+    {
+        "nama": "Nasi Padang",
+        "foto": "https://cdn-2.tstatic.net/jambi/foto/bank/images/resep-sate-ayam-manis.jpg",
+        "harga": 30000
+    },
+    {
+        "nama": "Taco",
+        "foto": "https://cdn-2.tstatic.net/jambi/foto/bank/images/resep-sate-ayam-manis.jpg",
+        "harga": 30000
+    }
+]
