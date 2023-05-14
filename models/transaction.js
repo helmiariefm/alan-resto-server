@@ -16,8 +16,10 @@ module.exports = (sequelize, DataTypes) => {
   transaction.init({
     nama: DataTypes.STRING,
     foto: DataTypes.STRING,
-    harga: DataTypes.INTEGER,
-    amount: DataTypes.INTEGER
+    harga_x_amount: DataTypes.INTEGER,
+    amount: DataTypes.INTEGER,
+    prodId: DataTypes.INTEGER,
+    harga: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'transaction',
