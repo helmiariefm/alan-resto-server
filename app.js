@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV === 'production'){
+if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config() 
 }
 
@@ -8,11 +8,28 @@ const port = process.env.PORT || 3000
 const cors = require('cors')
 const { food, transaction, sequelize } = require('./models')
 const { Op } = require('sequelize');
+const multer = require('multer');
+const path = require('path');
 const errorHandler = require('./helpers/errHandler')
 
 app.use(cors())
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
+
+// Set up Multer storage
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // Directory where uploaded files will be stored
+  },
+  filename: function (req, file, cb) {
+    // Generate a unique filename or use the original file name
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    const fileName = uniqueSuffix + '-' + file.originalname;
+    cb(null, fileName);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 app.get('/foodlist', async (req, res, next) => {
     try {
@@ -41,16 +58,24 @@ app.delete('/clear-cart', async (req, res, next) => {
     }
 })
 
-app.post('/addmenu', async (req, res, next) => {
+app.get('/uploads/:filename', (req, res) => {
+    const { filename } = req.params; // Get the filename parameter from the request URL
+    const imagePath = path.join(__dirname, 'uploads', filename); // Construct the full path to the image file
+
+    res.sendFile(imagePath); // Send the file as a response
+});
+
+app.post('/addmenu', upload.single('foto'), async (req, res, next) => {
     const {nama, harga} = req.body
     // console.log(req.body, '<<<<<');
     try{
         const createProduct = await food.create({
             nama: req.body.nama,
-            foto: "https://cdn-2.tstatic.net/jambi/foto/bank/images/resep-sate-ayam-manis.jpg", 
+            foto: req.file ? `https://dramatic-carpenter-production.up.railway.app/uploads/${req.file.filename}` : '', 
             harga: req.body.harga
         },{returning: true})        
         res.status(201).json(createProduct)
+        // console.log(createProduct, "<<<<<<<<||||||?")
     } catch (err){
         // console.log(err);
         next(err)
